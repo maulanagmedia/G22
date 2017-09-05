@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="rounde_corner">3dp</dimen>
+
+    <dimen name="default_padding">8dp</dimen>
+</resources>
