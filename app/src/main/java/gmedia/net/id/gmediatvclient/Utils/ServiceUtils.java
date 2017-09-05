@@ -12,4 +12,5 @@ public class ServiceUtils {
 
     public static final String COMMAND_RECEIVER = "gmedia.net.id.commandreceiver";
     public static final String COMMAND_CODE = "commandreceiver_code";
+    public static final String REQUEST_CONNECT_CLIENT = "request-connect-client";
 }

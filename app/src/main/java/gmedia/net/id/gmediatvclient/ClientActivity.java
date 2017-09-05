@@ -49,10 +49,8 @@ public class ClientActivity extends AppCompatActivity {
     private NsdManager mNsdManager;
     private final String TAG = "Client";
     private RecyclerView rvListConnection;
-    private static List<CustomItem> masterList = new ArrayList<>();
+    private List<CustomItem> masterList = new ArrayList<>();
     private ItemValidation iv = new ItemValidation();
-    private EditText edtText;
-    private Button btnSend;
     private static final String REQUEST_CONNECT_CLIENT = "request-connect-client";
 
     @Override
@@ -60,6 +58,7 @@ public class ClientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
 
+        masterList = new ArrayList<>();
         initUI();
 
         // NSD Stuff
@@ -72,31 +71,6 @@ public class ClientActivity extends AppCompatActivity {
     private void initUI() {
 
         rvListConnection = (RecyclerView) findViewById(R.id.rv_list_connection);
-        edtText = (EditText) findViewById(R.id.edt_text);
-        btnSend = (Button) findViewById(R.id.btn_send);
-
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                    String message = edtText.getText().toString();
-
-                    /*if(SelectedServer.name != null){
-                        Intent serviceIntent = new Intent(ClientActivity.this,
-                                DataTransferService.class);
-                        serviceIntent.setAction(DataTransferService.ACTION_SEND_DATA);
-                        serviceIntent.putExtra(
-                                DataTransferService.DEST_IP_ADDRESS, SelectedServer.host);
-                        serviceIntent.putExtra(
-                                DataTransferService.DEST_PORT_NUMBER, SelectedServer.port);
-
-                        serviceIntent.putExtra(DataTransferService.EXTRAS_SHARE_DATA, message);
-                        startService(serviceIntent);
-                    }*/
-
-                    connectToHost();
-            }
-        });
 
         setListConnection(masterList);
 
@@ -305,7 +279,7 @@ public class ClientActivity extends AppCompatActivity {
         try {
             jsonData.put("request", REQUEST_CONNECT_CLIENT);
             jsonData.put("ipAddress", ipAddress);
-            jsonData.put("keyCode", edtText.getText().toString());
+            jsonData.put("keyCode", "22");
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e(TAG, "can't put request");
@@ -422,5 +396,11 @@ public class ClientActivity extends AppCompatActivity {
                 Toast.makeText(ClientActivity.this, "Unable to connect", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }
